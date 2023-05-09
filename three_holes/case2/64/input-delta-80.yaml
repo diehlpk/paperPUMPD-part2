@@ -1,0 +1,117 @@
+Model:
+  Dimension: 2
+  Discretization_Type:
+    Spatial: finite_difference
+    Time: central_difference
+  Final_Time: 0.001
+  Time_Steps: 50000
+  Horizon:  0.004
+  Horizon_h_Ratio: 8
+Policy:
+  Enable_PostProcessing: true
+Mesh:
+  File: pum_mesh_64_load_step_80_crack_growth_step_3_fixed_h_1.vtu
+  Keep_Element_Conn: true
+  Load_PUM_data: Displacement
+Material:
+  Type: RNPBond
+  Is_Plane_Strain: true
+  Density: 1.200000e+2
+  Compute_From_Classical: true
+  E: 2.4e+9
+  Gc: 500.000000e+00
+  Bond_Potential:
+    Type: 1
+    Check_Sc_Factor: 10.0
+    Irreversible_Bond_Fracture: true
+  No_Penetration: true
+  Influence_Function:
+    Type: 1
+Fracture:
+  Cracks:
+    Sets: 15
+    Set_1:
+      Orientation: -1
+      Line: [0.1016e00,-0.1e+00, 0.1016e00, 0.0254e00]
+    Set_2:
+      Orientation: -1
+      Line: [0.1016e00, 0.0254e00,0.1017379808061378,0.025946993147887953]
+    Set_3:
+      Orientation: -1
+      Line: [0.1017379808061378,0.025946993147887953,0.10233563199387098,0.026423222565430476]
+    Set_4:
+      Orientation: -1
+      Line: [0.10233563199387098,0.026423222565430476,0.10281379897112987,0.026874824710619336]
+    Set_5:
+      Orientation: -1
+      Line: [0.10281379897112987,0.026874824710619336,0.10284036380319982,0.028349172890500714]
+    Set_6:
+      Orientation: -1
+      Line: [0.10284036380319982,0.028349172890500714,0.10272715312112579,0.029677371283392755]
+    Set_7:
+      Orientation: -1
+      Line: [0.10272715312112579,0.029677371283392755,0.10382959044728879,0.029780724782720577]
+    Set_8:
+      Orientation: -1
+      Line: [0.10382959044728879,0.029780724782720577,0.10387092905802404,0.030223351203825268]
+    Set_9:
+      Orientation: -1
+      Line: [0.10387092905802404,0.030223351203825268,0.10438522420689772,0.030384068437848206]
+    Set_10:
+      Orientation: -1
+      Line: [0.10438522420689772,0.030384068437848206,0.10438522420689744,0.03170194975683751]
+    Set_11:
+      Orientation: -1
+      Line: [0.10438522420689744,0.03170194975683751,0.1048834476323689,0.0318465952674582]
+    Set_12:
+      Orientation: -1
+      Line: [0.1048834476323689,0.0318465952674582,0.10491559107917296,0.03321269175665427]
+    Set_13:
+      Orientation: -1
+      Line: [0.10491559107917296,0.03321269175665427,0.10539774278124213,0.033325193820470334]
+    Set_14:
+      Orientation: -1
+      Line: [0.10539774278124213,0.033325193820470334,0.10541381450464406,0.03424128205440187]
+    Set_15:
+      Orientation: -1
+      Line: [0.10541381450464406,0.03424128205440187,0.10586382275990859,0.03424128205440175]
+Displacement_BC:
+  Sets: 2
+  Set_1:
+    Location:
+      Displacement_from_pum: []
+    Direction: [2]
+    Time_Function:
+      Type: linear
+      Parameters:
+        - 1
+    Spatial_Function:
+      Type: constant
+      Parameters: [1000]
+  Set_2:
+    Location:
+      Displacement_from_pum: []
+    Direction: [1]
+    Time_Function:
+      Type: linear
+      Parameters:
+        - 1
+    Spatial_Function:
+      Type: constant
+      Parameters: [1000]
+Output:
+  Path: ./out-80/
+  Tags:
+    - Displacement
+    - Velocity
+    - Force
+    - Damage_Z
+    - Neighbors
+    - Fixity
+    - Initial_Crack
+    - Broken_Bonds
+  Output_Interval: 500
+  Compress_Type: zlib
+  Perform_FE_Out: true
+HPX:
+  Partitions: 1

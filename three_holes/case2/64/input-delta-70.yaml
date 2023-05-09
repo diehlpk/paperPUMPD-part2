@@ -3,14 +3,14 @@ Model:
   Discretization_Type:
     Spatial: finite_difference
     Time: central_difference
-  Final_Time: 0.0001
+  Final_Time: 0.001
   Time_Steps: 50000
-  Horizon: 0.8
-  Horizon_h_Ratio: 4
+  Horizon:  0.004
+  Horizon_h_Ratio: 8
 Policy:
   Enable_PostProcessing: true
 Mesh:
-  File: pum_mesh_32_step_60_crack_growth_step_0.vtu
+  File: pum_mesh_64_load_step_70_crack_growth_step_1_fixed_h_1.vtu
   Keep_Element_Conn: true
   Load_PUM_data: Displacement
 Material:
@@ -18,8 +18,8 @@ Material:
   Is_Plane_Strain: true
   Density: 1.200000e+2
   Compute_From_Classical: true
-  E: 72.00000e+9
-  Gc: 8.000000e+00
+  E: 2.4e+9
+  Gc: 500.000000e+00
   Bond_Potential:
     Type: 1
     Check_Sc_Factor: 10.0
@@ -29,10 +29,13 @@ Material:
     Type: 1
 Fracture:
   Cracks:
-    Sets: 1
+    Sets: 2
     Set_1:
-      Orientation: 1
-      Line: [9.0e00,7.5e+00, 10.000e00, 7.5e00]
+      Orientation: -1
+      Line: [0.1016e00,-0.1e+00, 0.1016e00, 0.0254e00]
+    Set_2:
+      Orientation: -1
+      Line: [0.1016e00, 0.0254e00,0.1017379808061378,0.025946993147887953]
 Displacement_BC:
   Sets: 2
   Set_1:
@@ -58,7 +61,7 @@ Displacement_BC:
       Type: constant
       Parameters: [1000]
 Output:
-  Path: ./out-delta/
+  Path: ./out-70/
   Tags:
     - Displacement
     - Velocity
@@ -67,7 +70,6 @@ Output:
     - Neighbors
     - Fixity
     - Initial_Crack
-    - Broken_Bonds
   Output_Interval: 500
   Compress_Type: zlib
   Perform_FE_Out: true
