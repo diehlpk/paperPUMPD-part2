@@ -10,7 +10,7 @@ Model:
 Policy:
   Enable_PostProcessing: true
 Mesh:
-  File: pum_mesh_64_load_step_60_crack_growth_step_0_fixed_h_1.vtu
+  File: pum_mesh_64_load_step_60_crack_growth_step_0.vtu
   Keep_Element_Conn: true
   Load_PUM_data: Displacement
 Material:
@@ -31,7 +31,7 @@ Fracture:
   Cracks:
     Sets: 1
     Set_1:
-      Orientation: 1
+      Orientation: -1
       Line: [0.1016e00,-0.1e+00, 0.1016e00, 0.0254e00]
 Displacement_BC:
   Sets: 2
