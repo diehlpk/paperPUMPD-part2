@@ -1,0 +1,86 @@
+Model:
+  Dimension: 2
+  Discretization_Type:
+    Spatial: finite_difference
+    Time: central_difference
+  Final_Time: 0.001
+  Time_Steps: 50000
+  Horizon:  0.004
+  Horizon_h_Ratio: 8
+Policy:
+  Enable_PostProcessing: true
+Mesh:
+  File: pum_mesh_64_load_step_80_crack_growth_step_2.vtu
+  Keep_Element_Conn: true
+  Load_PUM_data: Displacement
+Material:
+  Type: RNPBond
+  Is_Plane_Strain: true
+  Density: 1.200000e+2
+  Compute_From_Classical: true
+  E: 2.4e+9
+  Gc: 500.000000e+00
+  Bond_Potential:
+    Type: 1
+    Check_Sc_Factor: 10.0
+    Irreversible_Bond_Fracture: true
+  No_Penetration: true
+  Influence_Function:
+    Type: 1
+Fracture:
+  Cracks:
+    Sets: 5
+    Set_1:
+      Orientation: -1
+      Line: [0.1016e00,-0.1e+00, 0.1016e00, 0.0254e00]
+    Set_2:
+      Orientation: -1
+      Line: [0.1016e00, 0.0254e00,0.10170992799465123,0.025850708170134348]
+    Set_3:
+      Orientation: -1
+      Line: [0.10170992799465123,0.025850708170134348,0.10277470378206903,0.02587436985429915]
+    Set_4:
+      Orientation: -1
+      Line: [0.10277470378206903,0.02587436985429915,0.10282202715039979,0.026773513852561572]
+    Set_5:
+      Orientation: -1
+      Line: [0.10282202715039979,0.026773513852561572,0.10286485498011425,0.027176604496644816]
+Displacement_BC:
+  Sets: 2
+  Set_1:
+    Location:
+      Displacement_from_pum: []
+    Direction: [2]
+    Time_Function:
+      Type: linear
+      Parameters:
+        - 1
+    Spatial_Function:
+      Type: constant
+      Parameters: [1000]
+  Set_2:
+    Location:
+      Displacement_from_pum: []
+    Direction: [1]
+    Time_Function:
+      Type: linear
+      Parameters:
+        - 1
+    Spatial_Function:
+      Type: constant
+      Parameters: [1000]
+Output:
+  Path: ./out-80/
+  Tags:
+    - Displacement
+    - Velocity
+    - Force
+    - Damage_Z
+    - Neighbors
+    - Fixity
+    - Initial_Crack
+  Output_Interval: 500
+  Compress_Type: zlib
+  Perform_FE_Out: true
+HPX:
+  Partitions: 1
